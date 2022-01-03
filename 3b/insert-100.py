@@ -2,7 +2,7 @@ import pandas as pd
 import json
 
 
-data = pd.read_csv("3a/clean.csv", low_memory=False)
+data = pd.read_csv("clean.csv", low_memory=False)
 df = pd.DataFrame(data)
 
 data_json = df.to_json(   orient = "records", 

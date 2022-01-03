@@ -13,7 +13,7 @@ mydb = sql.connect(
 
 cursor = mydb.cursor()
 
-# cursor.execute("CREATE DATABASE `pollution-db2` ")
+cursor.execute("CREATE DATABASE `pollution-db2` ") #This creates a new database instance
 
 
 
@@ -27,7 +27,7 @@ mydb = sql.connect(
 mycursor = mydb.cursor()
 
 
-mycursor.execute("DROP TABLE IF EXISTS `readings`;")
+mycursor.execute("DROP TABLE IF EXISTS `readings`;") #This drops a table if it already exists in the database
 
 
 
