@@ -2,8 +2,8 @@ import pandas as pd
 import json
 
 
-data = pd.read_csv("clean.csv", low_memory=False)
-df = pd.DataFrame(data)
+data = pd.read_csv("clean.csv", low_memory=False) # read csv file
+df = pd.DataFrame(data) # convert to a dataframe
 
 data_json = df.to_json(   orient = "records", 
                         date_format = "epoch", 
@@ -12,8 +12,8 @@ data_json = df.to_json(   orient = "records",
                         date_unit = "ms", 
                         default_handler = None
                     )
-data_list = json.loads(data_json)
-data_list = data_list[:100]
+data_list = json.loads(data_json) # covert to a list of dictionaries
+data_list = data_list[:100] # slice first 100 from the list
 
 with open('insert-100.sql', 'w'):
     for row in data_list:
@@ -47,7 +47,7 @@ with open('insert-100.sql', 'w'):
                 str(f"""'{row['DateEnd']}'""" if row['DateEnd'] else "NULL")+","+
                 str(current)+","+
                 str(f"""'{row['Instrument Type']}'""" if row['Instrument Type'] else "NULL")+
-                ");", file=open('insert-100.sql', 'a'))
+                ");", file=open('insert-100.sql', 'a')) #prints insertion commands with the first 100 data to the insert-100.sql file
 
 
 

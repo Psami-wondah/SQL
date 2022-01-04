@@ -103,6 +103,17 @@ for datum in data_list: #loops through the list of objects
 
 ```
 
+## Querying the db
+
+```python
+from bson.objectid import ObjectId
+
+document = db.readings.find_one({"_id": ObjectId('61d2c09dbac2b8724e9f1116')})
+
+print(document)
+
+```
+
 ## An example document from Mongodb Compass
 ```
 _id: ObjectId("61d2c09dbac2b8724e9f1116")

@@ -31,7 +31,7 @@ mycursor.execute("DROP TABLE IF EXISTS `readings`;") #This drops a table if it a
 
 
 
-mycursor.execute(""" CREATE TABLE readings (
+mycursor.execute(""" CREATE TABLE readings (   
     id INTEGER(11) NOT NULL AUTO_INCREMENT,
     `Date Time` DATETIME,
     NOx FLOAT(10),
@@ -57,14 +57,14 @@ mycursor.execute(""" CREATE TABLE readings (
     Current BOOLEAN,
     `Instrument Type` VARCHAR(255),
     primary key (id)
-    )""")
+    )""") #Creates a table in the database Instance
 
 
 
 
 
-data = pd.read_csv("3a/clean.csv", low_memory=False)
-df = pd.DataFrame(data)
+data = pd.read_csv("clean.csv", low_memory=False) #reads the csv file from directory
+df = pd.DataFrame(data) # converts to a pandas dataframe
 
 data_json = df.to_json(   orient = "records", 
                         date_format = "epoch", 
@@ -72,8 +72,8 @@ data_json = df.to_json(   orient = "records",
                         force_ascii = True, 
                         date_unit = "ms", 
                         default_handler = None
-                    )
-data_list = json.loads(data_json)
+                    ) #converts the dataframe to a json format
+data_list = json.loads(data_json) #converts the json string to a list of python dictionary objects
 
 
 
@@ -105,15 +105,15 @@ formula = """INSERT INTO readings (
                         %s, %s, %s, %s, %s, 
                         %s, %s, %s, %s, %s, 
                         %s, %s, %s, %s, %s, 
-                        %s, %s, %s)"""
+                        %s, %s, %s)""" #Creates an insertion order for data to be inserted into the db
 for row in data_list:
     mycursor.execute(formula, ( row['Date Time'], row['NOx'], row['NO2'], row['NO'], row['SiteID'], 
                                 row['PM10'], row['NVPM10'], row['VPM10'], row['NVPM2.5'], row['PM2.5'], 
                                 row['VPM2.5'], row['CO'], row['O3'], row['SO2'], row['Temperature'], 
                                 row['RH'], row['Air Pressure'], row['Location'], row['geo_point_2d'], row['DateStart'], 
-                                row['DateEnd'], row['Current'], row['Instrument Type'])  )
+                                row['DateEnd'], row['Current'], row['Instrument Type'])  ) #loops through the list and inserts new rows into the table
 
 
 
 
-mydb.commit()
+mydb.commit() #saves the insertions
