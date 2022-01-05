@@ -41,3 +41,9 @@
 
 
 # 5
+
+- Create a Model
+- Use pymongo to connect to the mongodb database with python
+- read csv file and convert to json as before
+- loop through items that have the Location AURN St Pauls' and insert them into the readings collection in the db
+- To query the db you can pass in the Id to get that particular object

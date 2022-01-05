@@ -1,3 +1,12 @@
+"""
+Requirements
+- pandas
+- mysql-connector-python
+
+"""
+
+
+
 import pandas as pd
 import mysql.connector as sql #importing the connector that connects the database
 import json
